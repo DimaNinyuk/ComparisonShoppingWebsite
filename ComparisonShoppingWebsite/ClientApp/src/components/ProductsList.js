@@ -18,7 +18,7 @@ export class Product extends React.Component {
         
         return <div>
             <p>shop: {this.props.product.name}</p>
-            <p>image: {this.props.product.imageurl}</p>
+            <img width="140px" height="124px" src={this.props.product.imageurl} />
             <p><b>{this.props.product.title}</b></p>
             <p>URL: {this.props.product.url}</p>
             <p>Prise: {this.props.product.price}</p>
@@ -72,13 +72,15 @@ export class ProductsList extends React.Component {
     //описываем рендер, создаем элементы и подписываемся на соответствующие методы
     render() {
         return <div className="my-class">
-            <p>
-                <input type="text"
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-describedby="basic-addon2"
                     placeholder="Keywords"
                     value={this.state.keywords}
                     onChange={this.onKeywordChange} />
-            </p>
-            <button onClick={this.filterData}>Search</button>
+                <div class="input-group-append">
+                    <button onClick={this.filterData}>Search</button>
+                </div>
+            </div>
             <h2>Results "{this.state.keywords}"</h2>
             <div>
                 { 

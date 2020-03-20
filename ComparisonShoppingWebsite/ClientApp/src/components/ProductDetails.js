@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 //компонент вывода отдельного продукта 
+
 export class ProductDetails extends React.Component {
+    
     state = {
         object: Object
     }

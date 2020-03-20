@@ -24,8 +24,8 @@ namespace ComparisonShoppingWebsite.Controllers
         {
             data.Clear();
             GetEbay(keywords);
-            GetAsos(keywords);
-         //   GetAmazon(keywords);
+            //GetAsos(keywords);
+            //GetAmazon(keywords);
             return data;
         }
 
@@ -48,6 +48,7 @@ namespace ComparisonShoppingWebsite.Controllers
                 FindItemsByKeywordsRequest request = new FindItemsByKeywordsRequest();
                 request.keywords = keywords;
                 FindItemsByKeywordsResponse response = client.findItemsByKeywords(request);
+                data.Clear();
                 if (response.searchResult != null && response.searchResult.count > 0)
                     foreach (var item in response.searchResult.item)
                     {
@@ -57,7 +58,7 @@ namespace ComparisonShoppingWebsite.Controllers
                         pr.Price = item.sellingStatus.currentPrice.Value;
                         pr.Currentcy = item.sellingStatus.currentPrice.currencyId;
                         pr.Id = item.itemId;
-                        pr.Imageurl = item.pictureURLLarge;
+                        pr.Imageurl = item.galleryURL;
                         pr.Name = "Ebay";
                         pr.detailsenabled = true;
                         data.Add(pr);
@@ -120,7 +121,7 @@ namespace ComparisonShoppingWebsite.Controllers
                         pr.Url = "https://www.asos.com/" + prod.url;
                         pr.Price = prod.price.current.value;
                         pr.Currentcy = prod.price.currency;
-                        pr.Imageurl = "https://www.asos.com/" + prod.imageUrl;
+                        pr.Imageurl = "https://"+prod.imageUrl;
                         pr.Name = "Asos";
                         pr.detailsenabled = true;
                         data.Add(pr);

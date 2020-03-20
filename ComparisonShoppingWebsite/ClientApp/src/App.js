@@ -18,12 +18,11 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={Home} />
-            <Route path='/search' component={ProductsList} />
-            <Route path='/details/:shop-:id' component={ProductDetails} />
-        <Route path='/counter' component={Counter} />
-        <AuthorizeRoute path='/fetch-data' component={FetchData} />
-        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+       <Route exact path='/' component={Home} />
+       <AuthorizeRoute path='/search' component={ProductsList} />
+       <Route path='/details/:shop-:id' component={ProductDetails} />
+       <AuthorizeRoute path='/fetch-data' component={FetchData} />
+       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
   }
