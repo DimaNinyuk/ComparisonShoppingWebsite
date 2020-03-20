@@ -9,6 +9,7 @@ using eBayReference;
 using ebayService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace ComparisonShoppingWebsite.Controllers
@@ -72,13 +73,15 @@ namespace ComparisonShoppingWebsite.Controllers
         public Product AsosGet(string id)
         {
 
-            var client = new RestClient("https://asos2.p.rapidapi.com/products/detail?sizeSchema=US&store=US&lang=en-US&currency=USD&id=14292246");
+            var client = new RestClient("https://asos2.p.rapidapi.com/products/detail?sizeSchema=US&store=US&lang=en-US&currency=USD&id=12000173");
             var request = new RestRequest(Method.GET);
             request.AddHeader("x-rapidapi-host", "asos2.p.rapidapi.com");
             request.AddHeader("x-rapidapi-key", "aceb22d176msh3d21a7602d172ffp194272jsn55c949386a6b");
             IRestResponse response = client.Execute(request);
-
-                return data;
+       
+            
+            return data;
+            
         }
     }
 }
