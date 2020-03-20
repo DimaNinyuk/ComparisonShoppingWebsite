@@ -9,6 +9,7 @@ using eBayReference;
 using ebayService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace ComparisonShoppingWebsite.Controllers
@@ -32,6 +33,10 @@ namespace ComparisonShoppingWebsite.Controllers
             {
                 AsosGet(id);
             }
+            else if (shop == "Amazon")
+            {
+                AmazonGet(id);
+            }
             return data;
         }
 
@@ -51,7 +56,7 @@ namespace ComparisonShoppingWebsite.Controllers
                 FindItemsByKeywordsRequest request = new FindItemsByKeywordsRequest();
                 request.keywords = id;
                 FindItemsByKeywordsResponse response = client.findItemsByKeywords(request);
-                if (response.searchResult != null)
+                if (response.searchResult.count>0  )
                 {
                     var pr = new Product();
                     pr.Title = response.searchResult.item[0].title;
@@ -67,12 +72,37 @@ namespace ComparisonShoppingWebsite.Controllers
             }
         }
 
+        [HttpGet, Route("amazonget")]
+        public Product AmazonGet(string id)
+        {
+            var client = new RestClient("https://amazon-price1.p.rapidapi.com/search?keywords=" + id + "&marketplace=ES");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("x-rapidapi-host", "amazon-price1.p.rapidapi.com");
+            request.AddHeader("x-rapidapi-key", "aceb22d176msh3d21a7602d172ffp194272jsn55c949386a6b");
+            IRestResponse response = client.Execute(request);
+            var newProd = JsonConvert.DeserializeObject<List<ProductAmazon>>(response.Content.ToString());
+
+            if (newProd.Count() > 0)
+            {
+                Product pr = new Product();
+                pr.Title = newProd[0].title;
+                pr.Url = newProd[0].detailPageURL;
+                pr.Id = newProd[0].ASIN;
+                pr.Price = double.Parse(newProd[0].price.Substring(4));
+                pr.Currentcy = newProd[0].price.Substring(0, 3);
+                pr.Imageurl = newProd[0].imageUrl;
+                pr.Name = "Amazon";
+                pr.detailsenabled = true;
+                data = pr;
+            }
+            
+            return data;
+        }
 
         [HttpGet, Route("asosget")]
         public Product AsosGet(string id)
         {
-
-            var client = new RestClient("https://asos2.p.rapidapi.com/products/detail?sizeSchema=US&store=US&lang=en-US&currency=USD&id=14292246");
+            var client = new RestClient("https://asos2.p.rapidapi.com/products/detail?sizeSchema=US&store=US&lang=en-US&currency=USD&id="+id);
             var request = new RestRequest(Method.GET);
             request.AddHeader("x-rapidapi-host", "asos2.p.rapidapi.com");
             request.AddHeader("x-rapidapi-key", "aceb22d176msh3d21a7602d172ffp194272jsn55c949386a6b");

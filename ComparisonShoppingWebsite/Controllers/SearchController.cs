@@ -25,7 +25,7 @@ namespace ComparisonShoppingWebsite.Controllers
             data.Clear();
             GetEbay(keywords);
             GetAsos(keywords);
-           // GetAmazon(keywords);
+         //   GetAmazon(keywords);
             return data;
         }
 
@@ -48,7 +48,7 @@ namespace ComparisonShoppingWebsite.Controllers
                 FindItemsByKeywordsRequest request = new FindItemsByKeywordsRequest();
                 request.keywords = keywords;
                 FindItemsByKeywordsResponse response = client.findItemsByKeywords(request);
-                if (response.searchResult != null)
+                if (response.searchResult != null && response.searchResult.count > 0)
                     foreach (var item in response.searchResult.item)
                     {
                         var pr = new Product();
@@ -74,16 +74,19 @@ namespace ComparisonShoppingWebsite.Controllers
             request.AddHeader("x-rapidapi-key", "aceb22d176msh3d21a7602d172ffp194272jsn55c949386a6b");
             IRestResponse response = client.Execute(request);
             var newProd = JsonConvert.DeserializeObject<List<ProductAmazon>>(response.Content.ToString());
+            if (newProd.Count>0)
+
             foreach (var prod in newProd)
             {
                 Product pr = new Product();
                 pr.Title = prod.title;
                 pr.Url = prod.detailPageURL;
+                pr.Id = prod.ASIN;
                 pr.Price = double.Parse(prod.price.Substring(4));
                 pr.Currentcy = prod.price.Substring(0, 3);
                 pr.Imageurl = prod.imageUrl;
                 pr.Name = "Amazon";
-                pr.detailsenabled = false;
+                pr.detailsenabled = true;
                 data.Add(pr);
             }
             return data;
@@ -98,7 +101,9 @@ namespace ComparisonShoppingWebsite.Controllers
             request.AddHeader("x-rapidapi-key", "aceb22d176msh3d21a7602d172ffp194272jsn55c949386a6b");
             IRestResponse response = client.Execute(request);
             var newProd = JsonConvert.DeserializeObject<ProductAsos>(response.Content.ToString());
-            foreach (var prod in newProd.Products)
+            if (newProd.Products.Count() > 0)
+
+                foreach (var prod in newProd.Products)
             {
                 Product pr = new Product();
                 pr.Id = prod.id.ToString();
