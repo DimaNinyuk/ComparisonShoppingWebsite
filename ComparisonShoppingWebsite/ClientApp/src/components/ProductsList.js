@@ -27,8 +27,7 @@ export class Product extends React.Component {
             <a href={`${this.props.product.url}`}>To {this.props.product.name}</a>
             <p> {this.state.details}</p>
             <hr/>
-        </div>;
-    
+        </div>;    
     }
 }
 
@@ -72,7 +71,7 @@ export class ProductsList extends React.Component {
     }
     //описываем рендер, создаем элементы и подписываемся на соответствующие методы
     render() {
-        return <div>
+        return <div className="my-class">
             <p>
                 <input type="text"
                     placeholder="Keywords"
