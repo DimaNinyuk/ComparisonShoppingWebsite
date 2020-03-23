@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
 
+
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
@@ -24,15 +25,23 @@ export class NavMenu extends Component {
 
   render () {
     return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-          <Container>
-            <NavbarBrand tag={Link} to="/">ComparisonShoppingWebsite</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+        <header>
+            <div class="pos-f-t">
+                <div class="collapse" id="navbarToggleExternalContent">
+                    <div class="bg-dark p-4">
+                    </div>
+                </div>
+            <Navbar class="navbar navbar-dark bg-dark" light>
+
+                <Container>
+                    
+           <NavbarBrand class="navbar-brand" tag={Link} to="/">Comparison Shopping Website</NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNavbar}  />
+                   
+                        <Collapse class="collapse navbar-collapse" isOpen={!this.state.collapsed} navbar>
+                            <ul class="navbar-nav mr-auto" style={{ float: 'right'}}>
+                            <NavItem class="nav-item active">
+                                <NavLink class="nav-link" tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 
                            
@@ -41,7 +50,9 @@ export class NavMenu extends Component {
               </ul>
             </Collapse>
           </Container>
-        </Navbar>
+                </Navbar>
+            </div>
+           
       </header>
     );
   }
