@@ -25,34 +25,37 @@ export class NavMenu extends Component {
 
   render () {
     return (
-        <header>
-            <div class="pos-f-t">
-                <div class="collapse" id="navbarToggleExternalContent">
-                    <div class="bg-dark p-4">
+        <header class="masthead">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Comparison Shopping Website</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home
+                <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <LoginMenu>
+                            </LoginMenu>
+                        </ul>
                     </div>
                 </div>
-            <Navbar class="navbar navbar-dark bg-dark" light>
+            </nav>
 
-                <Container>
-                    
-           <NavbarBrand class="navbar-brand" tag={Link} to="/">Comparison Shopping Website</NavbarBrand>
-                    <NavbarToggler onClick={this.toggleNavbar}  />
-                   
-                        <Collapse class="collapse navbar-collapse" isOpen={!this.state.collapsed} navbar>
-                            <ul class="navbar-nav mr-auto" style={{ float: 'right'}}>
-                            <NavItem class="nav-item active">
-                                <NavLink class="nav-link" tag={Link} className="text-dark" to="/">Home</NavLink>
-                </NavItem>
-                
-                           
-                <LoginMenu>
-                </LoginMenu>
-              </ul>
-            </Collapse>
-          </Container>
-                </Navbar>
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 text-center">
+                        <h1 class="font-weight-light">The system tracks prices in stores. The system provides the ability to view offers of a product of interest in stores.</h1>
+                        <p class="lead">There are a lot of shops on one site, try how convenient it is....</p>
+                    </div>
+                </div>
             </div>
-           
+ 
       </header>
     );
   }

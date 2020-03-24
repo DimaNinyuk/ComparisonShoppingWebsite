@@ -4,23 +4,45 @@ export class Home extends Component {
   static displayName = Home.name;
 
   render () {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
+      return (
+       
+        <div class="container">
+              <div class="row my-sm-4">
+                <div class="col-lg-4 col-sm-6 mb-4 ">
+                    <div class="card h-100">
+                          <a href="https://by.ebay.com/"><img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ebayheadquarters_2.jpg/274px-Ebayheadquarters_2.jpg" alt=""/></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                  <a href="#">eBay</a>
+                                </h4>
+                              <p class="card-text">American company providing services in the areas of online auctions (the main field of activity) and online stores . Manages the website eBay.com and its local versions in several countries, owned the company eBay Enterprise, but sold this unit in 2015 to the private investment companies Sterling Partners and Premiera Funds.</p>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                          <a href="https://www.amazon.com/"><img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Seattle_Spheres_on_May_10%2C_2018.jpg/274px-Seattle_Spheres_on_May_10%2C_2018.jpg" alt=""/></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                  <a href="#">Amazon</a>
+                                </h4>
+                              <p class="card-text">American company, the world's largest in the market of e-commerce platforms and public-cloud computing in terms of revenue and market capitalization. Headquarters - in Seattle.</p>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                          <a href="https://www.asos.com/women/"><img class="card-img-top" src="https://www.gsconto.com/files/post/363/Asos-of-title.jpeg?v=4055320476" alt=""/></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#">Asos</a>
+                                </h4>
+                              <p class="card-text">British multibrand store widely known in Europe and even in the world. Headquartered in London. The main operating center is in Barnsley , South Yorkshire ( England ), employing 3,000 employees for 2013. The Consumer Center is located in Hertford.</p>
+                            </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
     );
   }
 }
