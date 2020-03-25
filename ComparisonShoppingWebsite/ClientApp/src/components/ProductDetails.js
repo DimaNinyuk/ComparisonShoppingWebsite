@@ -34,13 +34,20 @@ export class ProductDetails extends React.Component {
     render() {
 
         return <div>
-            <p>shop: {this.state.object.name}</p>
+            <div class="card border-secondary my-sm-3">
+
+                <div class="card-header bg-secondary text-white">
+                    <p>shop: {this.state.object.name}</p>
+                </div>
+                <div class="card-body">
             <p>image: {this.state.object.imageurl}</p>
             <p><b>{this.state.object.title}</b></p>
             <p>URL: {this.state.object.url}</p>
             <p>Prise: {this.state.object.price}</p>
             <p>Currentcy: {this.state.object.currentcy}</p>
-            <p>id: {this.state.object.id}</p>
+                <p>id: {this.state.object.id}</p>
+                </div>
+            </div>
         </div>;
     }
 }

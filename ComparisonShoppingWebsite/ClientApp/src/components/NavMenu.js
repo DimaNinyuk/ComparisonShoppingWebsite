@@ -55,6 +55,7 @@ export class NavMenu extends Component {
                     </div>
                 </div>
             </div>
+           
  
       </header>
     );

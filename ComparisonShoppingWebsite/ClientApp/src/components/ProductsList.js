@@ -2,14 +2,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-
+import './NavMenu.css';
 //компонент вывода отдельного продукта 
 export class Product extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             details: (this.props.product.detailsenabled === true) ?
-                <NavLink to={`/details/${this.props.product.name}-${this.props.product.id}`}
+                <NavLink class="btn btn-secondary m-1 p-1" to = {`/details/${this.props.product.name}-${this.props.product.id}`
+        }
                 >Get details</NavLink> : null
         };
 
@@ -17,16 +18,25 @@ export class Product extends React.Component {
     render() {
         
         return <div>
-            <p>shop: {this.props.product.name}</p>
+            
+            <div class="card border-secondary my-sm-3">
+               
+                <div class="card-header bg-secondary text-white">
+                    <p>shop: {this.props.product.name}</p>
+                </div>
+                <div class="card-body">
             <img width="140px" height="124px" src={this.props.product.imageurl} />
             <p><b>{this.props.product.title}</b></p>
-            <p>URL: {this.props.product.url}</p>
+            
             <p>Prise: {this.props.product.price}</p>
             <p>Currentcy: {this.props.product.currentcy}</p>
             <p>id: {this.props.product.id}</p>
-            <a href={`${this.props.product.url}`}>To {this.props.product.name}</a>
-            <p> {this.state.details}</p>
-            <hr/>
+                    <a class="btn btn-secondary m-1 p-1" href={`${this.props.product.url}`}>To {this.props.product.name}</a>
+                    <p > {this.state.details}</p>
+                   
+              
+                </div>
+            </div>
         </div>;    
     }
 }
@@ -81,15 +91,22 @@ export class ProductsList extends React.Component {
                     <button onClick={this.filterData}>Search</button>
                 </div>
             </div>
-            <h2>Results "{this.state.keywords}"</h2>
+            
+                <h2>Results "{this.state.keywords}"</h2>
+            <div class="PD">
+            </div>
+
             <div>
+     
                 { 
                     // выводим массив products, для каждого элемента создаем наш элемент Product
                     this.state.products.map(function (product) {
                         return <Product key={product.id} product={product} />
                     })
-                }
+                    }
+                
             </div>
+
         </div>;
     }
 }
