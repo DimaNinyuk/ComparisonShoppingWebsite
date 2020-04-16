@@ -41,7 +41,7 @@ export class ProductDetails extends React.Component {
                 </div>
                 <div class="card-body">
 
-                    <img width="140px" height="124px" src={this.state.imageurl} />
+                    <img width="140px" height="124px" src={this.state.object.imageurl} />
 
             <p><b>{this.state.object.title}</b></p>
             
