@@ -21,13 +21,13 @@ namespace ComparisonShoppingWebsite.Controllers
         public Product data;
 
         [HttpGet, Route("get")]
-        public Product Get(string shop,string id)
+        public Product Get(string shop,string id,string img)
         {
             data = new Product();
           
             if(shop=="Ebay")
             {
-                EbayGet(id);
+                EbayGet(id,img);
             }
             else if (shop == "Asos")
             {
@@ -41,7 +41,7 @@ namespace ComparisonShoppingWebsite.Controllers
         }
 
         [HttpGet, Route("ebayget")]
-        public Product EbayGet( string id)
+        public Product EbayGet( string id,string img)
         {
             FindingServicePortTypeClient client = new FindingServicePortTypeClient();
             MessageHeader header = MessageHeader.CreateHeader("CustomHeader", "", "");
@@ -58,15 +58,17 @@ namespace ComparisonShoppingWebsite.Controllers
                 FindItemsByKeywordsResponse response = client.findItemsByKeywords(request);
                 if (response.searchResult.count>0  )
                 {
-                    var pr = new Product();
-                    pr.Title = response.searchResult.item[0].title;
-                    pr.Url = response.searchResult.item[0].viewItemURL;
-                    pr.Price = response.searchResult.item[0].sellingStatus.currentPrice.Value;
-                    pr.Currentcy = response.searchResult.item[0].sellingStatus.currentPrice.currencyId;
-                    pr.Id = response.searchResult.item[0].itemId;
-                    pr.Imageurl = response.searchResult.item[0].galleryURL;
-                    pr.Name = "Ebay";
-                    data = pr;
+                    var pr0 = response.searchResult.item[0];
+                        var pr = new Product();
+                        pr.Title = img;
+                        pr.Url = pr0.viewItemURL;
+                        pr.Price = pr0.sellingStatus.currentPrice.Value;
+                        pr.Currentcy = pr0.sellingStatus.currentPrice.currencyId;
+                        pr.Id = pr0.itemId;
+                        pr.Imageurl = img;
+                        pr.Name = "Ebay";
+                        data = pr;
+                    
                 }
                 return data;
             }

@@ -9,7 +9,7 @@ export class Product extends React.Component {
         super(props);
         this.state = {
             details: (this.props.product.detailsenabled === true) ?
-                <NavLink class="btn btn-secondary m-1 p-1" to = {`/details/${this.props.product.name}-${this.props.product.id}`
+                <NavLink class="btn btn-secondary m-1 p-1" to={`/details/${this.props.product}`
         }
                 >Get details</NavLink> : null
         };
