@@ -58,16 +58,15 @@ namespace ComparisonShoppingWebsite.Controllers
                 FindItemsByKeywordsResponse response = client.findItemsByKeywords(request);
                 if (response.searchResult.count>0  )
                 {
-                    var pr0 = response.searchResult.item[0];
-                        var pr = new Product();
-                        pr.Title = pr0.title;
-                        pr.Url = pr0.viewItemURL;
-                        pr.Price = pr0.sellingStatus.currentPrice.Value;
-                        pr.Currentcy = pr0.sellingStatus.currentPrice.currencyId;
-                        pr.Id = pr0.itemId;
-                        pr.Imageurl = pr0.galleryURL;
-                        pr.Name = "Ebay";
-                        data = pr;   
+                    var pr = new Product();
+                    pr.Title = response.searchResult.item[0].title;
+                    pr.Url = response.searchResult.item[0].viewItemURL;
+                    pr.Price = response.searchResult.item[0].sellingStatus.currentPrice.Value;
+                    pr.Currentcy = response.searchResult.item[0].sellingStatus.currentPrice.currencyId;
+                    pr.Id = response.searchResult.item[0].itemId;
+                    pr.Imageurl = response.searchResult.item[0].galleryURL;
+                    pr.Name = "Ebay";
+                    data = pr;
                 }
                 return data;
             }
@@ -76,8 +75,7 @@ namespace ComparisonShoppingWebsite.Controllers
         [HttpGet, Route("amazonget")]
         public Product AmazonGet(string id)
         {
-            try
-            {
+           
                 var client = new RestClient("https://amazon-price1.p.rapidapi.com/search?keywords=" + id + "&marketplace=ES");
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("x-rapidapi-host", "amazon-price1.p.rapidapi.com");
@@ -85,24 +83,21 @@ namespace ComparisonShoppingWebsite.Controllers
                 IRestResponse response = client.Execute(request);
                 var newProd = JsonConvert.DeserializeObject<List<ProductAmazon>>(response.Content.ToString());
 
-                if (newProd.Count() > 0)
-                {
+                
+                    
                     Product pr = new Product();
+                    string price = newProd[0].Price.Replace('\u00A0', ' ');
                     pr.Title = newProd[0].Title;
                     pr.Url = newProd[0].DetailPageUrl;
                     pr.Id = newProd[0].Asin;
-                    pr.Price = double.Parse(newProd[0].Price.Substring(4));
-                    pr.Currentcy = newProd[0].Price.Substring(0, 3);
+                    pr.Price = double.Parse(price.Substring(0, price.LastIndexOf(' ')));
+                    pr.Currentcy = price.Substring(price.LastIndexOf(' '), price.Length - price.LastIndexOf(' '));
                     pr.Imageurl = newProd[0].ImageUrl;
                     pr.Name = "Amazon";
                     pr.detailsenabled = true;
                     data = pr;
-                }
-            }
-            catch(Exception e)
-            {
-
-            }
+                
+         
             return data;
         }
 

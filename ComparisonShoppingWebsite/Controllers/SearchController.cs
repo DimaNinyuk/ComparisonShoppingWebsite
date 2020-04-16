@@ -80,12 +80,12 @@ namespace ComparisonShoppingWebsite.Controllers
                     {
                         
                         Product pr = new Product();
-                        
+                        string price = prod.Price.Replace('\u00A0', ' ');
                         pr.Title = prod.Title;
                         pr.Url = prod.DetailPageUrl;
                         pr.Id = prod.Asin;
-                        pr.Price = double.Parse(prod.Price.Replace('\u00A0', ' ').Substring(0, prod.Price.LastIndexOf(' ')));
-                        pr.Currentcy = prod.Price.Replace('\u00A0', ' ').Substring(prod.Price.LastIndexOf(' '),prod.Price.Length- prod.Price.LastIndexOf(' '));
+                        pr.Price = double.Parse(price.Substring(0, price.LastIndexOf(' ')));
+                        pr.Currentcy = price.Substring(price.LastIndexOf(' '), price.Length - price.LastIndexOf(' '));
                         pr.Imageurl = prod.ImageUrl;
                         pr.Name = "Amazon";
                         pr.detailsenabled = true;
