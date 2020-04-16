@@ -89,12 +89,12 @@ namespace ComparisonShoppingWebsite.Controllers
                 if (newProd.Count() > 0)
                 {
                     Product pr = new Product();
-                    pr.Title = newProd[0].title;
-                    pr.Url = newProd[0].detailPageURL;
-                    pr.Id = newProd[0].ASIN;
-                    pr.Price = double.Parse(newProd[0].price.Substring(4));
-                    pr.Currentcy = newProd[0].price.Substring(0, 3);
-                    pr.Imageurl = newProd[0].imageUrl;
+                    pr.Title = newProd[0].Title;
+                    pr.Url = newProd[0].DetailPageUrl;
+                    pr.Id = newProd[0].Asin;
+                    pr.Price = double.Parse(newProd[0].Price.Substring(4));
+                    pr.Currentcy = newProd[0].Price.Substring(0, 3);
+                    pr.Imageurl = newProd[0].ImageUrl;
                     pr.Name = "Amazon";
                     pr.detailsenabled = true;
                     data = pr;

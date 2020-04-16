@@ -24,8 +24,8 @@ namespace ComparisonShoppingWebsite.Controllers
         {
             data.Clear();
             GetEbay(keywords);
-            //GetAsos(keywords);
-            //GetAmazon(keywords);
+            GetAsos(keywords);
+            GetAmazon(keywords);
             return data;
         }
 
@@ -69,35 +69,29 @@ namespace ComparisonShoppingWebsite.Controllers
         [HttpGet, Route("getamazon")]
         public IEnumerable<Product> GetAmazon(string keywords)
         {
-            try
-            {
-                var client = new RestClient("https://amazon-price1.p.rapidapi.com/search?keywords=iphone&marketplace=ES");
+             var client = new RestClient("https://amazon-price1.p.rapidapi.com/search?keywords=" + keywords + "&marketplace=ES");
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("x-rapidapi-host", "amazon-price1.p.rapidapi.com");
                 request.AddHeader("x-rapidapi-key", "aceb22d176msh3d21a7602d172ffp194272jsn55c949386a6b");
                 IRestResponse response = client.Execute(request);
-
                 var newProd = JsonConvert.DeserializeObject<List<ProductAmazon>>(response.Content.ToString());
-                if (newProd.Count > 0)
-
-                foreach (var prod in newProd)
-                {
-                    Product pr = new Product();
-                    pr.Title = prod.title;
-                    pr.Url = prod.detailPageURL;
-                    pr.Id = prod.ASIN;
-                    pr.Price = double.Parse(prod.price.Substring(4));
-                    pr.Currentcy = prod.price.Substring(0, 3);
-                    pr.Imageurl = prod.imageUrl;
-                    pr.Name = "Amazon";
-                    pr.detailsenabled = true;
-                    data.Add(pr);
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
+                
+                    foreach (var prod in newProd)
+                    {
+                        
+                        Product pr = new Product();
+                        
+                        pr.Title = prod.Title;
+                        pr.Url = prod.DetailPageUrl;
+                        pr.Id = prod.Asin;
+                        pr.Price = double.Parse(prod.Price.Replace('\u00A0', ' ').Substring(0, prod.Price.LastIndexOf(' ')));
+                        pr.Currentcy = prod.Price.Replace('\u00A0', ' ').Substring(prod.Price.LastIndexOf(' '),prod.Price.Length- prod.Price.LastIndexOf(' '));
+                        pr.Imageurl = prod.ImageUrl;
+                        pr.Name = "Amazon";
+                        pr.detailsenabled = true;
+                        data.Add(pr);
+                    }
+          
             return data;
         }
 

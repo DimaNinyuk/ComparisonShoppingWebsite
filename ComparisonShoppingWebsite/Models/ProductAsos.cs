@@ -9,6 +9,7 @@ namespace ComparisonShoppingWebsite.Models
     {
         public ProductAs[] Products { get; set; }
     }
+
     public class ProductAs
     {
         public int id { get; set; }
