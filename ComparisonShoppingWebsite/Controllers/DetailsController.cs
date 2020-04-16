@@ -21,13 +21,13 @@ namespace ComparisonShoppingWebsite.Controllers
         public Product data;
 
         [HttpGet, Route("get")]
-        public Product Get(string shop,string id,string img)
+        public Product Get(string shop,string id)
         {
             data = new Product();
           
             if(shop=="Ebay")
             {
-                EbayGet(id,img);
+                EbayGet(id);
             }
             else if (shop == "Asos")
             {
@@ -41,7 +41,7 @@ namespace ComparisonShoppingWebsite.Controllers
         }
 
         [HttpGet, Route("ebayget")]
-        public Product EbayGet( string id,string img)
+        public Product EbayGet( string id)
         {
             FindingServicePortTypeClient client = new FindingServicePortTypeClient();
             MessageHeader header = MessageHeader.CreateHeader("CustomHeader", "", "");
@@ -60,15 +60,14 @@ namespace ComparisonShoppingWebsite.Controllers
                 {
                     var pr0 = response.searchResult.item[0];
                         var pr = new Product();
-                        pr.Title = img;
+                        pr.Title = pr0.title;
                         pr.Url = pr0.viewItemURL;
                         pr.Price = pr0.sellingStatus.currentPrice.Value;
                         pr.Currentcy = pr0.sellingStatus.currentPrice.currencyId;
                         pr.Id = pr0.itemId;
-                        pr.Imageurl = img;
+                        pr.Imageurl = pr0.galleryURL;
                         pr.Name = "Ebay";
-                        data = pr;
-                    
+                        data = pr;   
                 }
                 return data;
             }
