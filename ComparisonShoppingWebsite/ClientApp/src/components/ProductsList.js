@@ -48,7 +48,7 @@ export class ProductsList extends React.Component {
         super(props);
         //объ€вл€ем 2 элемента состо€ни€, строка ключевых слов и массив продуктов
         this.state = {
-            keywords:"",
+            keywords: "",
             products: []
         };
         //объ€вл€ем методы
@@ -62,10 +62,16 @@ export class ProductsList extends React.Component {
     }
     //метод посика, вызывает метд загрузки данныз
     filterData(e) {
+        this.setState({
+            products: []
+        })
         this.loadData();
     }
     //метод загрузки данных, получаем данные по ссылки и записываем их в массив соста€ни€ products
     loadData() {
+        this.setState({
+            products: []
+        })
         var self = this;
         axios.get('/api/search/get', {
             params: {
@@ -92,12 +98,9 @@ export class ProductsList extends React.Component {
                 </div>
             </div>
             
-                <h2>Results "{this.state.keywords}"</h2>
             <div class="PD">
             </div>
-
             <div>
-     
                 { 
                     // выводим массив products, дл€ каждого элемента создаем наш элемент Product
                     this.state.products.map(function (product) {
