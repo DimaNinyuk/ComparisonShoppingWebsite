@@ -64,7 +64,7 @@ namespace ComparisonShoppingWebsite.Controllers
                     pr.Price = response.searchResult.item[0].sellingStatus.currentPrice.Value;
                     pr.Currentcy = response.searchResult.item[0].sellingStatus.currentPrice.currencyId;
                     pr.Id = response.searchResult.item[0].itemId;
-                    pr.Imageurl = response.searchResult.item[0].pictureURLLarge;
+                    pr.Imageurl = response.searchResult.item[0].galleryURL;
                     pr.Name = "Ebay";
                     data = pr;
                 }
@@ -124,7 +124,7 @@ namespace ComparisonShoppingWebsite.Controllers
                     pr.Url = "https://www.asos.com/" + newProd.Products[0].url;
                     pr.Price = newProd.Products[0].price.current.value;
                     pr.Currentcy = newProd.Products[0].price.currency;
-                    pr.Imageurl = "https://www.asos.com/" + newProd.Products[0].imageUrl;
+                    pr.Imageurl = "https://" + newProd.Products[0].imageUrl;
                     pr.Name = "Asos";
                     pr.detailsenabled = true;
                     data = pr;
