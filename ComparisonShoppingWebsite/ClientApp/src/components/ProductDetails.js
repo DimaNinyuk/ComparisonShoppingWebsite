@@ -40,12 +40,16 @@ export class ProductDetails extends React.Component {
                     <p>shop: {this.state.object.name}</p>
                 </div>
                 <div class="card-body">
-            <p>image: {this.state.object.imageurl}</p>
+                    
+                    <img width="140px" height="124px" src={this.state.object.imageurl} />
+
             <p><b>{this.state.object.title}</b></p>
-            <p>URL: {this.state.object.url}</p>
+            
             <p>Prise: {this.state.object.price}</p>
             <p>Currentcy: {this.state.object.currentcy}</p>
-                <p>id: {this.state.object.id}</p>
+                    <p>id: {this.state.object.id}</p>
+                    
+                    <a class="btn btn-secondary m-1 p-1" href={this.state.object.url}>Go</a>
                 </div>
             </div>
         </div>;
