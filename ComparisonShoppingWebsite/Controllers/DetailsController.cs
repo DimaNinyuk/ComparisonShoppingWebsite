@@ -61,7 +61,7 @@ namespace ComparisonShoppingWebsite.Controllers
                     var pr = new Product();
                     pr.Title = response.searchResult.item[0].title;
                     pr.Url = response.searchResult.item[0].viewItemURL;
-                    pr.Price = response.searchResult.item[0].sellingStatus.currentPrice.Value;
+                    pr.Price = response.searchResult.item[0].sellingStatus.currentPrice.Value.ToString();
                     pr.Currentcy = response.searchResult.item[0].sellingStatus.currentPrice.currencyId;
                     pr.Id = response.searchResult.item[0].itemId;
                     pr.Imageurl = response.searchResult.item[0].galleryURL;
@@ -90,7 +90,7 @@ namespace ComparisonShoppingWebsite.Controllers
                     pr.Title = newProd[0].Title;
                     pr.Url = newProd[0].DetailPageUrl;
                     pr.Id = newProd[0].Asin;
-                    pr.Price = double.Parse(price.Substring(0, price.LastIndexOf(' ')));
+                    pr.Price = price.Substring(0, price.LastIndexOf(' '));
                     pr.Currentcy = price.Substring(price.LastIndexOf(' '), price.Length - price.LastIndexOf(' '));
                     pr.Imageurl = newProd[0].ImageUrl;
                     pr.Name = "Amazon";
@@ -118,7 +118,7 @@ namespace ComparisonShoppingWebsite.Controllers
                     pr.Id = newProd.Products[0].id.ToString();
                     pr.Title = newProd.Products[0].name;
                     pr.Url = "https://www.asos.com/" + newProd.Products[0].url;
-                    pr.Price = newProd.Products[0].price.current.value;
+                    pr.Price = newProd.Products[0].price.current.value.ToString();
                     pr.Currentcy = newProd.Products[0].price.currency;
                     pr.Imageurl = "https://" + newProd.Products[0].imageUrl;
                     pr.Name = "Asos";
